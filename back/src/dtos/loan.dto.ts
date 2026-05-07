@@ -9,3 +9,5 @@ export class CreateLoanDto {
   @Min(1)
   memberId: number;
 }
+
+export class ReturnLoanDto {}

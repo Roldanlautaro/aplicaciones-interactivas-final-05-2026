@@ -33,7 +33,7 @@ export class Loan {
   loanDate: Date;
 
   // Se calcula en el service (loanDate + 14 días)
-  @Column({ nullable: false })
+  @Column({ type: 'datetime', nullable: false })
   dueDate: Date;
 
   @Column({ type: 'datetime', nullable: true })

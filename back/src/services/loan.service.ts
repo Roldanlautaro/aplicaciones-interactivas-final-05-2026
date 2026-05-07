@@ -22,26 +22,26 @@ export const LoanService = {
       if (!member) throw new HttpError(404, `Member ${dto.memberId} not found`);
 
       if (book.status === BookStatus.WITHDRAWN) {
-        throw new HttpError(400, "Book is withdrawn and cannot be loaned");
+        throw new HttpError(409, "Book is withdrawn and cannot be loaned");
       }
       if (book.availableCopies <= 0) {
-        throw new HttpError(400, "No available copies for this book");
+        throw new HttpError(409, "No available copies for this book");
       }
       if (member.status === MemberStatus.SUSPENDED) {
-        throw new HttpError(400, "Member is suspended");
+        throw new HttpError(409, "Member is suspended");
       }
 
       const activeLoans = await loanRepo.find({
         where: { member: { id: member.id }, status: LoanStatus.ACTIVE },
       });
       if (activeLoans.length >= MAX_ACTIVE_LOANS_PER_MEMBER) {
-        throw new HttpError(400, `Member has reached the limit of ${MAX_ACTIVE_LOANS_PER_MEMBER} active loans`);
+        throw new HttpError(409, `Member has reached the limit of ${MAX_ACTIVE_LOANS_PER_MEMBER} active loans`);
       }
 
       const now = new Date();
       const hasOverdue = activeLoans.some((l) => l.dueDate < now);
       if (hasOverdue) {
-        throw new HttpError(400, "Member has overdue loans and cannot borrow until resolved");
+        throw new HttpError(409, "Member has overdue loans and cannot borrow until resolved");
       }
 
       const loanDate = now;
@@ -83,7 +83,7 @@ export const LoanService = {
       if (!loan) throw new HttpError(404, `Loan ${id} not found`);
 
       if (loan.status === LoanStatus.RETURNED) {
-        throw new HttpError(400, "Loan is already returned");
+        throw new HttpError(409, "Loan is already returned");
       }
 
       loan.status = LoanStatus.RETURNED;

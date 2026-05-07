@@ -2,6 +2,10 @@ import { Request, Response } from "express";
 import { LoanService } from "../services/loan.service";
 import { HttpError } from "../errors/HttpError";
 
+
+// create: recibe un JSON con los datos del préstamo (sin id) y devuelve el préstamo creado con su id asignado.
+// list: devuelve un array con todos los préstamos.
+// returnLoan: recibe un id por params, marca el préstamo como devuelto (returned = true) y devuelve el préstamo actualizado.
 export const LoanController = {
   async create(req: Request, res: Response) {
     const loan = await LoanService.create(req.body);

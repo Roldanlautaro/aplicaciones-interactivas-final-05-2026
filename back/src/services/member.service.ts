@@ -7,11 +7,11 @@ export const MemberService = {
   async create(dto: CreateMemberDto): Promise<Member> {
     const byNumber = await MemberRepository.findOne({ where: { memberNumber: dto.memberNumber } });
     if (byNumber) {
-      throw new HttpError(400, `memberNumber ${dto.memberNumber} already exists`);
+      throw new HttpError(409, `memberNumber ${dto.memberNumber} already exists`);
     }
     const byEmail = await MemberRepository.findOne({ where: { email: dto.email } });
     if (byEmail) {
-      throw new HttpError(400, `email ${dto.email} already exists`);
+      throw new HttpError(409, `email ${dto.email} already exists`);
     }
 
     const member = MemberRepository.create({

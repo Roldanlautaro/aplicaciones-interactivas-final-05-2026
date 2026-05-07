@@ -2,7 +2,12 @@ import { Request, Response } from "express";
 import { BookService } from "../services/book.service";
 import { HttpError } from "../errors/HttpError";
 
+
+// create: recibe un JSON con los datos del libro (sin id) y devuelve el libro creado con su id asignado.
+// list: devuelve un array con todos los libros.
+// update: recibe un id por params y un JSON con los datos a actualizar (isbn, title, author, genre, totalCopies, availableCopies, status) y devuelve el libro actualizado.
 export const BookController = {
+  
   async create(req: Request, res: Response) {
     const book = await BookService.create(req.body);
     res.status(201).json(book);

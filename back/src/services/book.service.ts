@@ -3,11 +3,12 @@ import { Book, BookStatus } from "../entities/Book";
 import { CreateBookDto, UpdateBookDto } from "../dtos/book.dto";
 import { HttpError } from "../errors/HttpError";
 
+
 export const BookService = {
   async create(dto: CreateBookDto): Promise<Book> {
     const existing = await BookRepository.findOne({ where: { isbn: dto.isbn } });
     if (existing) {
-      throw new HttpError(400, `ISBN ${dto.isbn} already exists`);
+      throw new HttpError(409, `ISBN ${dto.isbn} already exists`);
     }
 
     const book = BookRepository.create({
@@ -46,7 +47,7 @@ export const BookService = {
       const loanedCopies = book.totalCopies - book.availableCopies;
       if (dto.totalCopies < loanedCopies) {
         throw new HttpError(
-          400,
+          409,
           `totalCopies (${dto.totalCopies}) cannot be less than copies currently on loan (${loanedCopies})`,
         );
       }

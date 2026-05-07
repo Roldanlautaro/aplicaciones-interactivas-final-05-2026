@@ -2,6 +2,7 @@ import { RequestHandler } from "express";
 import { plainToInstance, ClassConstructor } from "class-transformer";
 import { validate } from "class-validator";
 
+// Middleware para validar el cuerpo de las solicitudes entrantes contra una clase DTO (Data Transfer Object) utilizando class-validator y class-transformer
 export const validateDto =
   <T extends object>(DtoClass: ClassConstructor<T>): RequestHandler =>
   async (req, res, next) => {
