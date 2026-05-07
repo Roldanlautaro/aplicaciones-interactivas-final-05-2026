@@ -1,27 +1,26 @@
 // Design tokens centralizados.
-// Importar desde aquí en componentes en lugar de hardcodear colores/espacios.
 
 export const colors = {
   primary: "#2563eb", // azul principal
   primaryHover: "#1d4ed8",
   primaryActive: "#1e40af",
-  secondary: "#475569", // slate-600
+  secondary: "#475569",
   secondaryHover: "#334155",
   danger: "#dc2626",
   dangerHover: "#b91c1c",
   success: "#16a34a",
   warning: "#d97706",
 
-  bgPage: "#f8fafc", // slate-50
+  bgPage: "#f8fafc", 
   surface: "#ffffff",
-  surfaceAlt: "#f1f5f9", // slate-100 — header de tablas
+  surfaceAlt: "#f1f5f9", 
   surfaceHover: "rgba(15, 23, 42, 0.03)",
 
-  border: "#e2e8f0", // slate-200
-  borderStrong: "#cbd5e1", // slate-300
+  border: "#e2e8f0", 
+  borderStrong: "#cbd5e1", 
 
-  text: "#0f172a", // slate-900
-  textMuted: "#64748b", // slate-500
+  text: "#0f172a", 
+  textMuted: "#64748b", 
   textOnPrimary: "#ffffff",
 
   errorBg: "#fee2e2",
